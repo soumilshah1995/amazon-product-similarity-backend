@@ -4,10 +4,8 @@ services:
 
   flask:
     build: ./flask
-    container_name: flask
+    container_name: flask-project
     restart: always
-    depends_on:
-      - redis
     expose:
       - 8080
     volumes:
@@ -19,7 +17,3 @@ services:
     restart: always
     ports:
       - "80:80"
-
-  redis:
-    image: redis
-
