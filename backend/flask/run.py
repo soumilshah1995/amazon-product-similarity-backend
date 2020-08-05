@@ -1,4 +1,9 @@
 try:
+    import os
+    import sys
+
+    sys.path.append(os.getcwd())
+
     from flask import Flask
     from flask_restful import Resource, Api
     import json
@@ -6,8 +11,6 @@ try:
     import datetime
 except Exception as e:
     print("Error : {} ".format(e))
-
-
 
 app = Flask(__name__)
 api = Api(app)
