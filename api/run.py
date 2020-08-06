@@ -89,7 +89,7 @@ parser = reqparse.RequestParser()
 parser.add_argument("what", type=str, required=True, help="This is Required Parameters ")
 parser.add_argument("name", type=str, required=False, help="This is filter name ")
 parser.add_argument("categories", type=str, required=False, help="Filter for Categories")
-
+api.add_resource(Controller, '/compute128')
 
 # -------- DONT TOUCH-------
 class ElasticSearchQuery(object):
@@ -313,6 +313,7 @@ class ElasticSearchQuery(object):
         query  =self.add_aggreation(field=field, size=size, sort=sort,aggregate_name='auto_complete' )
         query = self.complete_aggreation()
         return query
+
 class Tokens(object):
 
     def __init__(self, word):
@@ -327,3 +328,7 @@ class Tokens(object):
         x = x[0].tolist()
         return x
 # ------------
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
