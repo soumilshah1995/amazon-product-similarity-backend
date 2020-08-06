@@ -20,12 +20,10 @@ sys.path.append("API")
 ssl._create_default_https_context = ssl._create_unverified_context
 
 
-class Compute(Resource):
-
-    def __init__(self):
-        self.data = parser.parse_args().get('data', None)
-
-    def get(self):
+class Tokens(object):
+    def __init__(self, word):
+        self.word = word
+    def token(self):
         module_url = os.getcwd()
         path = os.path.join(module_url, "API/Compute")
         embed = hub.KerasLayer(path)
@@ -33,6 +31,15 @@ class Compute(Resource):
         x = np.asarray(embeddings)
         x = x[0].tolist()
         return {"vector": x}
+
+class Controller(Resource):
+
+    def __init__(self):
+        self.data = parser.parse_args().get('data', None)
+
+    def get(self):
+        pass
+
 
 
 parser = reqparse.RequestParser()
