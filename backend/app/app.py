@@ -1,3 +1,7 @@
+
+from dotenv import load_dotenv
+load_dotenv()
+
 try:
     from API import (app,api,Compute,Controller)
 except Exception as e:

@@ -10,8 +10,22 @@ try:
     import numpy as np
     import ssl
     from API.Compute.queryGenerator import ElasticSearchQuery
+    import elasticsearch
+    from elasticsearch import Elasticsearch
+
 except Exception as e:
-    pass
+    print("Error : {} ".format(e))
+
+
+# ------------------------------------------------------------
+global ELK_ENDPOINT
+global ELK_INDEX
+
+ELK_ENDPOINT =  os.getenv("ELK_ENDPOINT","http://localhost:9200/")
+ELK_INDEX  =os.getenv("ELK_INDEX","final_project")
+
+# ------------------------------------------------------------
+
 
 app = Flask(__name__)
 api = Api(app)
@@ -54,7 +68,7 @@ class Controller(Resource):
         helper.add_aggreation(aggregate_name="FirstName", field="XXXXX",type='terms',sort='desc', size=3)
         helper.add_aggreation(aggregate_name="SecondName", field="XXXXX",type='terms',sort='desc', size=3)
         query = helper.complete_aggreation()
-
+        return query
 
 parser = reqparse.RequestParser()
 parser.add_argument("what", type=str, required=True, help="This is Required Parameters ")

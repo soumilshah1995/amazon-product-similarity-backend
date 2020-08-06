@@ -6,6 +6,8 @@ services:
     build:
       context: ./
     container_name: microservices
+    env_file:
+      - dev.env
     restart: always
     volumes:
       - "./app:/usr/src/app:rw"
