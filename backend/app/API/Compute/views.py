@@ -24,7 +24,7 @@ global es
 
 ELK_ENDPOINT =  os.getenv("ELK_ENDPOINT","http://localhost:9200/")
 ELK_INDEX    =  os.getenv("ELK_INDEX","final_project")
-es = Elasticsearch(ELK_INDEX, timeout=300)
+es = Elasticsearch(ELK_ENDPOINT, timeout=300)
 # ------------------------------------------------------------
 
 
@@ -33,8 +33,8 @@ api = Api(app)
 
 sys.path.append("Compute")
 sys.path.append("API")
-ssl._create_default_https_context = ssl._create_unverified_context
 
+ssl._create_default_https_context = ssl._create_unverified_context
 
 class Tokens(object):
 
@@ -63,10 +63,12 @@ class Controller(Resource):
         Return the JSON Response fROM ELK
         :return:
         """
-
+        print("IN")
         try:
             # Step 1: Create a instance of class
             helper  = ElasticSearchQuery(size=100, BucketName="MyBuckets")
+
+            print("WHAT ")
 
             if self.what is not None:
                 if len(self.what) >= 2:
@@ -86,6 +88,7 @@ class Controller(Resource):
             helper.add_aggreation(aggregate_name="Categories", field="categories.keyword",type='terms',sort='desc', size=5)
 
             query = helper.complete_aggreation()
+            es = Elasticsearch(timeout=600, hosts=ELK_ENDPOINT)
             res = es.search(index=ELK_INDEX,
                             size=10,
                             body=query,
@@ -96,10 +99,12 @@ class Controller(Resource):
             },200
 
         except Exception as e:
+            print(e)
             return {"Message":"Error : {} ".format(e)},500
 
 
 parser = reqparse.RequestParser()
 parser.add_argument("what", type=str, required=True, help="This is Required Parameters ")
 parser.add_argument("name", type=str, required=False, help="This is filter name ")
-parser.add_argument("categories", type=str, required=False, help="Filter for Categories ")
+parser.add_argument("categories", type=str, required=False, help="Filter for Categories")
+
