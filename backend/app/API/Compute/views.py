@@ -9,6 +9,7 @@ try:
     import tensorflow_hub as hub
     import numpy as np
     import ssl
+    from API.Compute.queryGenerator import ElasticSearchQuery
 except Exception as e:
     pass
 
@@ -21,8 +22,10 @@ ssl._create_default_https_context = ssl._create_unverified_context
 
 
 class Tokens(object):
+
     def __init__(self, word):
         self.word = word
+
     def token(self):
         module_url = os.getcwd()
         path = os.path.join(module_url, "API/Compute")
@@ -30,19 +33,30 @@ class Tokens(object):
         embeddings = embed([self.data])
         x = np.asarray(embeddings)
         x = x[0].tolist()
-        return {"vector": x}
+        return x
+
 
 class Controller(Resource):
 
     def __init__(self):
-        self.data = parser.parse_args().get('data', None)
+        self.what = parser.parse_args().get('what', None)
 
     def get(self):
-        pass
+        """
+        Return the JSON Response fROM ELK
+        :return:
+        """
+        # Step 1: Create a instance of class
+        helper  = ElasticSearchQuery(size=100, BucketName="MyBuckets")
+        query   = helper.match(field="XXXXXXXXXXX", value="XXXXXX", operation='must')
 
+        # Aggreation Query in ELK
+        helper.add_aggreation(aggregate_name="FirstName", field="XXXXX",type='terms',sort='desc', size=3)
+        helper.add_aggreation(aggregate_name="SecondName", field="XXXXX",type='terms',sort='desc', size=3)
+        query = helper.complete_aggreation()
 
 
 parser = reqparse.RequestParser()
-parser.add_argument("data", type=str, required=True, help="This is Required Parameters ")
+parser.add_argument("what", type=str, required=True, help="This is Required Parameters ")
 
 
