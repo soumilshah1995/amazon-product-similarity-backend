@@ -85,6 +85,54 @@ class Controller(Resource):
             return {"Message":"Error : {} ".format(e)},500
 
 
+class AutoComplete(Resource):
+    def __init__(self):
+        self.name =  parser.parse_args().get('name', None)
+        self.baseQuery ={
+            "_source": [],
+            "size": 0,
+            "min_score": 0.5,
+            "query": {
+                "bool": {
+                    "must": [
+                        {
+                            "match_phrase_prefix": {
+                                "name": {
+                                    "query": "{}".format(self.name)
+                                }
+                            }
+                        }
+                    ],
+                    "filter": [],
+                    "should": [],
+                    "must_not": []
+                }
+            },
+            "aggs": {
+                "auto_complete": {
+                    "terms": {
+                        "field": "name.keyword",
+                        "order": {
+                            "_count": "desc"
+                        },
+                        "size": 25
+                    }
+                }
+            }
+        }
+
+    def get(self):
+
+        """
+        This is Auto Complete
+        :return: Json
+        """
+
+        es = Elasticsearch(timeout=600, hosts=ELK_ENDPOINT)
+        res = es.search(index=ELK_INDEX, size=0, body=self.baseQuery)
+        return res
+
+
 parser = reqparse.RequestParser()
 parser.add_argument("what", type=str, required=True, help="This is Required Parameters ")
 parser.add_argument("name", type=str, required=False, help="This is filter name ")
