@@ -87,7 +87,7 @@ class Controller(Resource):
 
 class AutoComplete(Resource):
     def __init__(self):
-        self.name =  parser.parse_args().get('name', None)
+        self.what =  parser.parse_args().get('what', None)
         self.baseQuery ={
             "_source": [],
             "size": 0,
@@ -98,7 +98,7 @@ class AutoComplete(Resource):
                         {
                             "match_phrase_prefix": {
                                 "name": {
-                                    "query": "{}".format(self.name)
+                                    "query": "{}".format(self.what)
                                 }
                             }
                         }
@@ -134,10 +134,13 @@ class AutoComplete(Resource):
 
 
 parser = reqparse.RequestParser()
-parser.add_argument("what", type=str, required=True, help="This is Required Parameters ")
+parser.add_argument("what", type=str, required=False, help="This is Required Parameters ")
 parser.add_argument("name", type=str, required=False, help="This is filter name ")
 parser.add_argument("categories", type=str, required=False, help="Filter for Categories")
-api.add_resource(Controller, '/compute128')
+
+api.add_resource(Controller, '/search')
+api.add_resource(AutoComplete, '/autocomplete')
+
 
 # -------- DONT TOUCH-------
 class ElasticSearchQuery(object):

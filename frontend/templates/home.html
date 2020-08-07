@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+
+    <title></title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+
+<body>
+
+
+<style>
+    .search-container {
+        background-color: #FFF;
+        position: relative;
+        border-radius: 30px;
+        padding: 3px 50px 3px 10px;
+    }
+    .search-box {
+        background-color: transparent;
+        outline: none;
+        height: 35px;
+        font-size: 15px;
+        border: 0;
+        width: 100%;
+    }
+    .search-button {
+        position: absolute;
+        right: 4px;
+        top: 4px;
+        background-color: #C00;
+        border-radius: 50%;
+        border: 0;
+        color: #FFF;
+        width: 35px;
+        height: 35px;
+        outline: 0;
+    }
+
+    .jumbotron{
+        background-image: url("https://cdn.shopify.com/s/files/1/0898/4708/articles/Black_Friday_Header_FA.jpg?v=1572010345");
+        background-size: cover;
+    }
+
+
+</style>
+
+<nav style="position: sticky; top: 0px;" class="navbar navbar-dark bg-dark">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+        <a class="navbar-brand" href="#">Team 1</a>
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div style="height:auto;" class="jumbotron">
+    <div class="search-container">
+            <input style="height: 40px;" name="search"  class="search-box" placeholder="Enter Product Name" id="source" />
+            <div id="result"></div>
+            <a onclick="btn_submit()" style="text-align: center; height: 45px; width: 45px;top: 0px;right: 0px;color: black;padding: 5px;background: #8df44c;" class="search-button">Go</a>
+    </div>
+
+    <div class="row" style="margin-top: 30px;">
+        <div class="col-md-3" style="height: auto;border: 1px solid white;">
+        </div>
+
+        <div class="col-md-9" style="border: 1px solid white;">
+            <div style="padding: 20px" class="card-deck">
+
+                <div class="card mb-5" style="border-radius: 30px">
+                    <img style="height: 300px; border-radius: 30px" height="300px" class="card-img-top img-fluid" src="https://cache.net-a-porter.com/images/products/1233825/1233825_in_2000_q80.jpg" alt="Card image cap">
+                    <div class="card-body">
+                        <h4 style="text-align: center" class="card-title">1 Card title</h4>
+                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        <button style="border-radius: 30px;" class="form-control btn btn-primary">View</button>
+                    </div>
+                </div>
+
+
+                <div class="card mb-5" style="border-radius: 30px">
+                    <img style="height:300px;border-radius: 30px" height="300px" class="card-img-top img-fluid" src="https://cdn.pocket-lint.com/r/s/1200x/assets/images/148764-gadgets-review-amazon-kindle-oasis-2019-review-image1-gmszqrf6pd.jpg" alt="Card image cap">
+                    <div class="card-body">
+                        <h4 style="text-align: center" class="card-title">2 Card title</h4>
+                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        <button style="border-radius: 30px;" class="form-control btn btn-primary">View</button>
+                    </div>
+                </div>
+
+                <div class="card mb-5" style="border-radius: 30px">
+                    <img style="height: 300px;border-radius: 30px" height="300px" class="card-img-top img-fluid" src="https://cdn.pocket-lint.com/r/s/970x/assets/images/147515-tablets-review-ipad-mini-review-2019-image1-y5aisrcjw9-jpg.webp" alt="Card image cap">
+                    <div class="card-body">
+                        <h4 style="text-align: center" class="card-title">2 Card title</h4>
+                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        <button style="border-radius: 30px;" class="form-control btn btn-primary">View</button>
+                    </div>
+                </div>
+
+            </div>
+            <div style="padding: 20px" class="card-deck">
+
+                <div class="card mb-5" style="border-radius: 30px">
+                    <img style="height: 300px; border-radius: 30px" height="300px" class="card-img-top img-fluid" src="https://cache.net-a-porter.com/images/products/1233825/1233825_in_2000_q80.jpg" alt="Card image cap">
+                    <div class="card-body">
+                        <h4 style="text-align: center" class="card-title">1 Card title</h4>
+                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        <button style="border-radius: 30px;" class="form-control btn btn-primary">View</button>
+                    </div>
+                </div>
+
+
+                <div class="card mb-5" style="border-radius: 30px">
+                    <img style="height:300px;border-radius: 30px" height="300px" class="card-img-top img-fluid" src="https://cdn.pocket-lint.com/r/s/1200x/assets/images/148764-gadgets-review-amazon-kindle-oasis-2019-review-image1-gmszqrf6pd.jpg" alt="Card image cap">
+                    <div class="card-body">
+                        <h4 style="text-align: center" class="card-title">2 Card title</h4>
+                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        <button style="border-radius: 30px;" class="form-control btn btn-primary">View</button>
+                    </div>
+                </div>
+
+                <div class="card mb-5" style="border-radius: 30px">
+                    <img style="height: 300px;border-radius: 30px" height="300px" class="card-img-top img-fluid" src="https://cdn.pocket-lint.com/r/s/970x/assets/images/147515-tablets-review-ipad-mini-review-2019-image1-y5aisrcjw9-jpg.webp" alt="Card image cap">
+                    <div class="card-body">
+                        <h4 style="text-align: center" class="card-title">2 Card title</h4>
+                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        <button style="border-radius: 30px;" class="form-control btn btn-primary">View</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const $source = document.querySelector('#source');
+    const $result = document.querySelector('#result');
+
+    const typeHandler = function(e) {
+        $result.innerHTML = e.target.value;
+        $.ajax({
+            url: "/pipe",
+            type : 'POST',
+            cache: false,
+            data:{'data': e.target.value},
+            success: function(html)
+            {
+                var data = html.aggregations.auto_complete.buckets
+                var _ = []
+                $.each(data, (index, value)=>{
+                    _.push(value.key)
+                });
+                $( "#source" ).autocomplete({
+                    source: _
+                });
+            }
+        });
+    }
+
+    $source.addEventListener('input', typeHandler) // register for oninput
+    $source.addEventListener('propertychange', typeHandler) // for IE8
+
+    function btn_submit()
+    {
+        sessionStorage.setItem('title', $("#source").val() )
+    }
+    $( document ).ready(function() {
+        var data = sessionStorage.getItem('title')
+        $("#source").val(data);
+    });
+
+</script>
+</body>
+</html>
