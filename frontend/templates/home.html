@@ -1,25 +1,5 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-<head>
-
-    <title></title>
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="/resources/demos/style.css">
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-
-
-<body>
+{% extends "base.html" %}
+{% block content %}
 
 
 <style>
@@ -58,21 +38,8 @@
 
 </style>
 
-<nav style="position: sticky; top: 0px;" class="navbar navbar-dark bg-dark">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-        <a class="navbar-brand" href="#">Team 1</a>
-        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-        </ul>
-    </div>
-</nav>
-
 <div style="height:auto;" class="jumbotron">
+
     <div class="search-container">
             <input style="height: 40px;" name="search"  class="search-box" placeholder="Enter Product Name" id="source" />
             <div id="result"></div>
@@ -80,75 +47,30 @@
     </div>
 
     <div class="row" style="margin-top: 30px;">
-        <div class="col-md-3" style="height: auto;border: 1px solid white;">
-        </div>
-
-        <div class="col-md-9" style="border: 1px solid white;">
-            <div style="padding: 20px" class="card-deck">
-
-                <div class="card mb-5" style="border-radius: 30px">
-                    <img style="height: 300px; border-radius: 30px" height="300px" class="card-img-top img-fluid" src="https://cache.net-a-porter.com/images/products/1233825/1233825_in_2000_q80.jpg" alt="Card image cap">
-                    <div class="card-body">
-                        <h4 style="text-align: center" class="card-title">1 Card title</h4>
-                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        <button style="border-radius: 30px;" class="form-control btn btn-primary">View</button>
+        {%  raw  %}
+                <div id="product-data"></div>
+                <script id="product-template" type="text/x-handlebars-template">
+                    <div class="container">
+                        {{#each this  }}
+                                <div  style="padding: 20px;width: 450px;" class="card-deck">
+                                    <div class="card mb-5" style="border-radius: 30px">
+                                        <img style="height: 300px; border-radius: 30px" height="300px" class="card-img-top img-fluid" src="{{this._source.imageURLs.[0]}}" alt="Card image cap">
+                                        <div class="card-body">
+                                            <h4 style="text-align: center" class="card-title">{{this._source.name}}</h4>
+                                            <p class="card-text">{{this._source.categories}}</p>
+                                            <button style="border-radius: 30px;" class="form-control btn btn-primary">View</button>
+                                        </div>
+                                    </div>
+                                </div>
+                        {{/each}}
                     </div>
-                </div>
+                </script>
+        {%  endraw    %}
 
 
-                <div class="card mb-5" style="border-radius: 30px">
-                    <img style="height:300px;border-radius: 30px" height="300px" class="card-img-top img-fluid" src="https://cdn.pocket-lint.com/r/s/1200x/assets/images/148764-gadgets-review-amazon-kindle-oasis-2019-review-image1-gmszqrf6pd.jpg" alt="Card image cap">
-                    <div class="card-body">
-                        <h4 style="text-align: center" class="card-title">2 Card title</h4>
-                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        <button style="border-radius: 30px;" class="form-control btn btn-primary">View</button>
-                    </div>
-                </div>
-
-                <div class="card mb-5" style="border-radius: 30px">
-                    <img style="height: 300px;border-radius: 30px" height="300px" class="card-img-top img-fluid" src="https://cdn.pocket-lint.com/r/s/970x/assets/images/147515-tablets-review-ipad-mini-review-2019-image1-y5aisrcjw9-jpg.webp" alt="Card image cap">
-                    <div class="card-body">
-                        <h4 style="text-align: center" class="card-title">2 Card title</h4>
-                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        <button style="border-radius: 30px;" class="form-control btn btn-primary">View</button>
-                    </div>
-                </div>
-
-            </div>
-            <div style="padding: 20px" class="card-deck">
-
-                <div class="card mb-5" style="border-radius: 30px">
-                    <img style="height: 300px; border-radius: 30px" height="300px" class="card-img-top img-fluid" src="https://cache.net-a-porter.com/images/products/1233825/1233825_in_2000_q80.jpg" alt="Card image cap">
-                    <div class="card-body">
-                        <h4 style="text-align: center" class="card-title">1 Card title</h4>
-                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        <button style="border-radius: 30px;" class="form-control btn btn-primary">View</button>
-                    </div>
-                </div>
-
-
-                <div class="card mb-5" style="border-radius: 30px">
-                    <img style="height:300px;border-radius: 30px" height="300px" class="card-img-top img-fluid" src="https://cdn.pocket-lint.com/r/s/1200x/assets/images/148764-gadgets-review-amazon-kindle-oasis-2019-review-image1-gmszqrf6pd.jpg" alt="Card image cap">
-                    <div class="card-body">
-                        <h4 style="text-align: center" class="card-title">2 Card title</h4>
-                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        <button style="border-radius: 30px;" class="form-control btn btn-primary">View</button>
-                    </div>
-                </div>
-
-                <div class="card mb-5" style="border-radius: 30px">
-                    <img style="height: 300px;border-radius: 30px" height="300px" class="card-img-top img-fluid" src="https://cdn.pocket-lint.com/r/s/970x/assets/images/147515-tablets-review-ipad-mini-review-2019-image1-y5aisrcjw9-jpg.webp" alt="Card image cap">
-                    <div class="card-body">
-                        <h4 style="text-align: center" class="card-title">2 Card title</h4>
-                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        <button style="border-radius: 30px;" class="form-control btn btn-primary">View</button>
-                    </div>
-                </div>
-
-            </div>
-        </div>
     </div>
 </div>
+
 
 <script>
     const $source = document.querySelector('#source');
@@ -180,13 +102,119 @@
 
     function btn_submit()
     {
-        sessionStorage.setItem('title', $("#source").val() )
+        sessionStorage.setItem('title', $("#source").val() );
+        var search_val = $("#source").val()
+
+        $.ajax({
+            url: "/search",
+            type : 'POST',
+            cache: false,
+            data:{
+                'what': search_val
+            },
+            success: function(data)
+            {
+
+                console.log(data.result);
+                var card = data.result.hits.hits
+                var facets = data.result.aggregations
+                console.log(facets);
+
+
+
+
+                var templateScript = Handlebars.compile($('#product-template').html());
+                $('#product-data').html(templateScript(card));
+
+                var templateScript = Handlebars.compile($('#facets-template').html());
+                $('#facets-data').html(templateScript(facets));
+
+                console.log("DONE")
+
+
+            }
+        });
     }
+
+
     $( document ).ready(function() {
         var data = sessionStorage.getItem('title')
         $("#source").val(data);
     });
 
+    Handlebars.registerHelper('facets_round_numbers', function (data) {
+        if (!data) return '';
+        var value = parseInt(data);
+        var ret = value;
+
+        if (value > 10000) ret = (Math.round(value / 1000) * 1000);
+        if (value > 1000) ret = (Math.round(value / 100) * 100);
+        else if (value > 10) ret = (Math.round(value / 10) * 10);
+
+        var tem = null;
+
+        if (ret <= 10)
+        {
+            tem = '1-9'
+        };
+
+        if (ret >= 11 && ret <= 99)
+        {
+            tem = '10-99'
+        }
+
+        if (ret >= 100 && ret <= 500)
+        {
+            tem = '100-499'
+        }
+        if (ret >= 500)
+        {
+            tem = '500+'
+        }
+        return tem;
+    });
+
+    Handlebars.registerHelper('int_format', function (data) {
+        if (!data) return '';
+        return parseInt(data);
+    });
+
+    Handlebars.registerHelper('if_cond', function (v1, operator, v2, options) {
+
+        switch (operator) {
+            case '==':
+                return (v1 == v2) ? options.fn(this) : options.inverse(this);
+            case '===':
+                return (v1 === v2) ? options.fn(this) : options.inverse(this);
+            case '!=':
+                return (v1 != v2) ? options.fn(this) : options.inverse(this);
+            case '!==':
+                return (v1 !== v2) ? options.fn(this) : options.inverse(this);
+            case '<':
+                return (v1 < v2) ? options.fn(this) : options.inverse(this);
+            case '<=':
+                return (v1 <= v2) ? options.fn(this) : options.inverse(this);
+            case '>':
+                return (v1 > v2) ? options.fn(this) : options.inverse(this);
+            case '>=':
+                return (v1 >= v2) ? options.fn(this) : options.inverse(this);
+            case '&&':
+                return (v1 && v2) ? options.fn(this) : options.inverse(this);
+            case '||':
+                return (v1 || v2) ? options.fn(this) : options.inverse(this);
+            default:
+                return options.inverse(this);
+        }
+    });
+
+    Handlebars.registerHelper('if_eq', function (a, b, opts) {
+        if (a == b)
+            return opts.fn(this);
+        else
+            return opts.inverse(this);
+    });
+
+
 </script>
-</body>
-</html>
+{% endblock %}
+

@@ -1,8 +1,11 @@
-from flask import Flask
-from flask import request,redirect,render_template,session
-import requests
-import base64
-import requests
+try:
+    from flask import Flask
+    from flask import request,redirect,render_template,session
+    import requests
+    import base64
+    import requests
+except Exception as e:
+    print('Error : {} '.format(e))
 
 app = Flask(__name__)
 
@@ -10,6 +13,18 @@ app = Flask(__name__)
 @app.route('/', methods=["GET", "POST"])
 def index():
     return render_template("home.html")
+
+
+@app.route('/search', methods=["GET", "POST"])
+def search():
+
+    what = request.form.get("what")
+    print("WHAT : {} ".format(what))
+    url = "http://localhost:5000/search?what="+what
+    r = requests.get(url)
+    r = r.json()
+    return r
+
 
 
 @app.route('/pipe', methods=["GET", "POST"])
