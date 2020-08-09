@@ -41,17 +41,18 @@
 <div style="height:auto;" class="jumbotron">
 
     <div class="search-container">
-            <input style="height: 40px;" name="search"  class="search-box" placeholder="Enter Product Name" id="source" />
+            <input style="height: 50px;" name="search"  class="search-box" placeholder="Enter Product Name" id="source" />
             <div id="result"></div>
-            <a onclick="btn_submit()" style="text-align: center; height: 45px; width: 45px;top: 0px;right: 0px;color: black;padding: 5px;background: #8df44c;" class="search-button">Go</a>
+            <a onclick="btn_submit()" style="text-align: center; height: 60px; width: 60px;top: 0px;right: 0px;color: black;padding: 5px;background: #8df44c;" class="search-button">Go</a>
     </div>
 
 
     <div class="row" style="margin-top: 30px;">
         {%  raw  %}
                     <div  id="product-data" style="justify-content: center; padding-top: 50px;"></div>
+
                     <script id="product-template" type="text/x-handlebars-template">
-                          <div class="wrapper" style="display: flex; width: 100%;flex-wrap: wrap;padding-left: 100px">
+                            <div class="wrapper" style="display: flex; width: 100%;flex-wrap: wrap;padding-left: 100px; justify-content: center;">
                                     {{#each this  }}
                                             <div class="p-3 col-3 col-sm-8 col-md-6 col-lg-4">
                                   <div class="card">
@@ -105,7 +106,7 @@
             <br/>
             <br/>
 
-            <div class="wrapper" style="display: flex; width: 100%;flex-wrap: wrap;padding-left: 100px">
+            <div class="wrapper" style="display: flex; width: 100%;flex-wrap: wrap;padding-left: 100px; justify-content: center;">
                 {{#each this  }}
                         <<div class="p-3 col-3 col-sm-8 col-md-6 col-lg-4">
                 <div class="card">
