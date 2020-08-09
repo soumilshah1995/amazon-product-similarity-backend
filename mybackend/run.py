@@ -72,12 +72,42 @@ class Controller(Resource):
             query = helper.complete_aggreation()
             es = Elasticsearch(timeout=600, hosts=ELK_ENDPOINT)
             res = es.search(index=ELK_INDEX,
-                            size=10,
+                            size=4,
                             body=query,
                             request_timeout=55)
 
+            # -----------------------------------------------------
+            # convert what into vector
+            helper_token = Tokens(word=self.what)
+            token = helper_token.token()
+
+            similar_query = {
+                "size":30,
+                "query":{
+                    "script_score":{
+                        "query":{
+                            "match_all":{
+
+                            }
+                        },
+                        "script":{
+                            "source":"cosineSimilarity(params.query_vector, 'name_vector') + 1.0",
+                            "params":{
+                                "query_vector":token
+                            }
+                        }
+                    }
+                }
+            }
+
+            res_similar = es.search(index=ELK_INDEX,
+                            size=30,
+                            body=similar_query,
+                            request_timeout=55)
+
             return {
-                       "result":res
+                       "result":res,
+                        "similar":res_similar
                    },200
 
         except Exception as e:
@@ -374,7 +404,7 @@ class Tokens(object):
         module_url = os.getcwd()
         #path = os.path.join(module_url, "API/Compute")
         embed = hub.KerasLayer(module_url)
-        embeddings = embed([self.data])
+        embeddings = embed([self.word])
         x = np.asarray(embeddings)
         x = x[0].tolist()
         return x
