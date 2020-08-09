@@ -35,16 +35,15 @@
         background-size: cover;
     }
 
-
 </style>
 
 <div style="height:auto;" class="jumbotron">
 
-    <div class="search-container">
-            <input style="height: 50px;" name="search"  class="search-box" placeholder="Enter Product Name" id="source" />
-            <div id="result"></div>
-            <a onclick="btn_submit()" style="text-align: center; height: 60px; width: 60px;top: -0.1em;right: 0px;color: wheat;padding: 15px;background: #red;" class="search-button">Go</a>
-    </div>
+            <div class="search-container">
+                    <input style="height: 50px;" name="search"  class="search-box" placeholder="Enter Product Name" id="source" />
+                    <div id="result"></div>
+                    <a onclick="btn_submit()" style="text-align: center; height: 60px; width: 60px;top: -0.1em;right: 0px;color: wheat;padding: 15px;background: #red;" class="search-button">Go</a>
+            </div>
 
 
     <div class="row" style="margin-top: 30px;">
@@ -93,10 +92,7 @@
                      </script>
         {%  endraw    %}
     </div>
-
-
     <br/> <br/>
-
     <div class="row" style="margin-top: 30px;">
         {%  raw  %}
         <div id="product-similar-data" style="justify-content: center; padding-top: 50px;"></div>
@@ -148,13 +144,13 @@
         </script>
         {%  endraw    %}
     </div>
-
     <br/> <br/> <br/> <br/>
 
 </div>
 
 
 <script>
+
     const $source = document.querySelector('#source');
     const $result = document.querySelector('#result');
 
@@ -196,8 +192,6 @@
             },
             success: function(data)
             {
-                console.log(data)
-
                 // Product you searched for
                 var templateScript = Handlebars.compile($('#product-template').html());
                 $('#product-data').html(templateScript(data.result.hits.hits));
@@ -205,9 +199,6 @@
 
                 var templateScript = Handlebars.compile($('#product-similar-template').html());
                 $('#product-similar-data').html(templateScript(data.similar.hits.hits));
-
-                console.log("DONE")
-
 
             }
         });
